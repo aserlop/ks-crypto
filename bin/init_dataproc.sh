@@ -1,6 +1,6 @@
 # names params
-BUCKET_NAME=ks_crypto
-CLUSTER_NAME=ks_crypto-cluster
+BUCKET_NAME=ks-crypto
+CLUSTER_NAME=ks-crypto-cluster
 
 # region params
 REGION=europe-west2
