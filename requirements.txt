@@ -266,14 +266,7 @@ sortedcollections==1.1.2
 sortedcontainers==2.1.0
 soupsieve==1.9.3
 sparkmonitor-s==0.0.11
-Sphinx==2.2.0
-sphinxcontrib-applehelp==1.0.1
-sphinxcontrib-devhelp==1.0.1
-sphinxcontrib-htmlhelp==1.0.2
-sphinxcontrib-jsmath==1.0.1
-sphinxcontrib-qthelp==1.0.2
-sphinxcontrib-serializinghtml==1.1.3
-sphinxcontrib-websupport==1.1.2
+Sphinx==1.8.5
 spyder==3.3.6
 spyder-kernels==0.5.2
 spylon==0.3.0
