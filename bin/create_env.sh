@@ -9,7 +9,7 @@ pushd .
 cd ../
 source activate $ENV_NAME
 python setup.py clean
-pip install .
+sudo pip install .
 python -m ipykernel install --user --name $ENV_NAME --display-name $KERNEL_NAME
 conda deactivate
 popd
