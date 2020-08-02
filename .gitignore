@@ -1,0 +1,12 @@
+*.csv
+/.project
+.ipynb_checkpoints/
+.keep
+.idea/
+*.zip
+*.log
+__pycache__/
+*.egg-info/
+build/
+dist/
+nohup.out
