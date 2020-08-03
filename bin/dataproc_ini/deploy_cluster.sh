@@ -6,7 +6,7 @@ ZONE=$3
 BUCKET_NAME=$4
 
 # initialization-actions
-INI_BASE_GS_PATH=gs://${BUCKET_NAME}/ks-crypto/dataproc_ini/
+INI_BASE_GS_PATH=gs://${BUCKET_NAME}/ks-crypto/dataproc_ini
 
 # cluster params
 MASTER_MACHINE_TYPE=n1-standard-4
@@ -32,5 +32,5 @@ gcloud dataproc clusters create \
   --optional-components=ANACONDA,JUPYTER \
   --enable-component-gateway \
   --metadata 'PIP_PACKAGES=google-cloud-bigquery google-cloud-storage' \
-  --initialization-actions="${INI_BASE_GS_PATH}/pip-install.sh,${INI_BASE_GS_PATH}/bootstrap.sh"
+  --initialization-actions="${INI_BASE_GS_PATH}/pip_install.sh,${INI_BASE_GS_PATH}/bootstrap.sh"
 

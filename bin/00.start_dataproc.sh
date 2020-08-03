@@ -6,7 +6,6 @@ CLUSTER_NAME=ks-crypto-cluster
 REGION=europe-west2
 ZONE=europe-west2-b
 
-
 echo "Enabling services config..."
 gcloud services enable \
   dataproc.googleapis.com \
