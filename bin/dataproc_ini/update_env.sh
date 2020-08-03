@@ -3,7 +3,7 @@
 ENV_NAME=p_ks_crypto
 
 pushd .
-cd ../
+cd ../../
 source activate $ENV_NAME
 python setup.py clean
 pip install .
