@@ -10,4 +10,3 @@ python setup.py clean
 pip install .
 python -m ipykernel install --user --name $ENV_NAME
 sudo mv /root/.local/share/jupyter/kernels/${ENV_NAME}/ /opt/conda/anaconda/share/jupyter/kernels/
-conda deactivate
