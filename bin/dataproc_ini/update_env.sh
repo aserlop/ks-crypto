@@ -2,8 +2,7 @@
 
 ENV_NAME=p_ks_crypto
 
-# Create environment and install setup.py (and its dependencies)
-conda create -n $ENV_NAME python=3.7
+# Update environment installing setup.py again
 conda activate $ENV_NAME
 # shellcheck disable=SC2164
 cd /home/ks-crypto
@@ -14,7 +13,3 @@ pip install .
 # shellcheck disable=SC2164
 cd /opt/conda/anaconda/envs/
 zip -rou ${ENV_NAME}.zip ${ENV_NAME}/
-
-# Create kernel an put it in the default folder
-python -m ipykernel install --user --name $ENV_NAME
-sudo mv /root/.local/share/jupyter/kernels/${ENV_NAME}/ /opt/conda/anaconda/share/jupyter/kernels/
