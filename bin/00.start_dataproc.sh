@@ -14,11 +14,7 @@ gcloud services enable \
   bigquery.googleapis.com \
   bigquerystorage.googleapis.com
 
-# Create bucket
-# echo "Creating new bucket..."
-# gsutil mb -c standard -l ${REGION} gs://${BUCKET_NAME}
-
-echo "Uploading files "
+echo "Uploading files... "
 gsutil cp -r ./dataproc_ini/* gs://${BUCKET_NAME}/ks-crypto/dataproc_ini/
 
 echo "Deploying cluster..."
@@ -26,8 +22,14 @@ sh ./dataproc_ini/deploy_cluster.sh ${CLUSTER_NAME} ${REGION} ${ZONE} ${BUCKET_N
 
 echo "Finish!"
 
+# BACKUP COMMANDS
+
 # Config session
 # gcloud init
+
+# Create bucket
+# echo "Creating new bucket..."
+# gsutil mb -c standard -l ${REGION} gs://${BUCKET_NAME}
 
 # Delete cluster
 # gcloud dataproc clusters delete ${CLUSTER_NAME} --region=${REGION}
