@@ -21,7 +21,7 @@ gcloud dataproc clusters create \
   "${CLUSTER_NAME}" \
   --region="${REGION}" \
   --zone="${ZONE}" \
-  --image-version=1.5 \
+  --image-version=preview \
   --master-machine-type=${MASTER_MACHINE_TYPE} \
   --num-masters=${NUM_MASTERS} \
   --master-boot-disk-size=${MASTER_DISK_SIZE} \

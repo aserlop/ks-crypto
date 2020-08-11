@@ -228,7 +228,7 @@ pyOpenSSL==19.0.0
 pyparsing==2.4.2
 pyrsistent==0.15.4
 PySocks==1.7.1
-pyspark==2.4.5
+pyspark==3.0.0
 pytest==5.2.1
 pytest-arraydiff==0.3
 pytest-astropy==0.5.0
