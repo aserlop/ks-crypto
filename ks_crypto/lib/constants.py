@@ -12,8 +12,10 @@ KS_CRYPTO_DS = 'ks_crypto_dataset'
 BQ_PUB_DATA_PROJ = 'bigquery-public-data'
 BITCOIN_DS = 'crypto_bitcoin'
 
-F_MIN = ""  # no incluida
-F_MAX = ""  # incluida
+F_MIN = '2016-01-01'  # incluida
+F_MAX = '2017-10-01'  # incluida
+
+YYYY_MM_DD_PY_MASK = '%Y-%m-%d'
 
 BLOCK_TIMESTAMP = 'block_timestamp'
 BLOCK_TIMESTAMP_MONTH = 'block_timestamp_month'
