@@ -4,8 +4,6 @@ findspark==1.
 google-api-core==1.
 google-api-python-client==1.
 google-auth==1.
-google-auth-httplib2==0.
-google-auth-oauthlib==0.
 google-cloud-bigquery==1.
 google-cloud-core==1.
 google-cloud-dataproc==1.
