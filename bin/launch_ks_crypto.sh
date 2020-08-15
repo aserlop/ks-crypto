@@ -23,6 +23,6 @@ PERIOD_UNIT='days'
 # Create a dataproc
 # ./00_start_dataproc.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} && \
 
-./01_extract_data ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT}
+./01_extract_data.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT}
 
 
