@@ -1,9 +1,10 @@
-# names params
-BUCKET_NAME=ks-crypto
-CLUSTER_NAME=ks-crypto-cluster
 
-# region params
-REGION=europe-west2
+${CLUSTER_NAME} ${REGION} ${BUCKET_NAME}
+
+CLUSTER_NAME=$1
+REGION=$2
+BUCKET_NAME=$3
+
 ZONE=europe-west2-b
 
 echo "Enabling services config..."

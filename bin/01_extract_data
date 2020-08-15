@@ -2,9 +2,14 @@
 # ----------------------------------------------------------------------------------------------------------------------
 #                                                   PARAMETERS
 # ----------------------------------------------------------------------------------------------------------------------
-DATE_END=$1
-NUM_PERIODS=$3
-PERIOD_UNIT=$4
+
+CLUSTER_NAME=$1
+REGION=$2
+BUCKET_NAME=$3
+
+DATE_END=$4
+NUM_PERIODS=$5
+PERIOD_UNIT=$6
 
 # Generic Config Spark
 APP_NAME="ks_crypto_extract_data"
@@ -27,15 +32,20 @@ HIVE_OUTPUT_FULL_TABLENAME="kschool-crypto:ks_crypto_dataset.transactions_flatte
 # ----------------------------------------------------------------------------------------------------------------------
 
 ## Launch Task
-PYSPARK_PYTHON="/envpath/bin/python" \
-spark-submit \
---master yarn \
---deploy-mode cluster \
---name ${APP_NAME} \
---conf spark.yarn.appMasterEnv.PYSPARK_PYTHON=${PYTHON_DENV_REL_PATH} \
---conf spark.yarn.dist.archives=${DENV_FULL_PATH} \
---conf spark.yarn.maxAppAttempts=1 \
+
+gcloud dataproc jobs submit pyspark \
+--cluster=${CLUSTER_NAME} \
+--region=${REGION} \
+--bucket=${BUCKET_NAME} \
+--properties="
+spark.master=yarn,
+spark.submit.deployMode=cluster,
+spark.app.name=${APP_NAME},
+yarn:spark.yarn.appMasterEnv.PYSPARK_PYTHON=${PYTHON_DENV_REL_PATH},
+yarn:spark.yarn.maxAppAttempts=1,
+yarn:spark.yarn.dist.archives=${DENV_FULL_PATH}" \
 ${TASK_MODULE_REL_PATH} \
+-- \
 --end_date "${DATE_END}" \
 --output_tablename "${HIVE_OUTPUT_FULL_TABLENAME}" \
 --check_point ${HDFS_FULL_PATH_CHECKPOINT} \
