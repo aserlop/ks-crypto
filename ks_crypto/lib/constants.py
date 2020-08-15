@@ -15,7 +15,10 @@ BITCOIN_DS = 'crypto_bitcoin'
 F_MIN = '2016-01-01'  # incluida
 F_MAX = '2017-10-01'  # incluida
 
-YYYY_MM_DD_PY_MASK = '%Y-%m-%d'
+PY_YYYYMMDD_MASK = '%Y%m%d'
+PY_YYYY_MM_DD_MASK = '%Y-%m-%d'
+SPARK_YYYYMMDD_MASK = 'yyyyMMdd'
+SPARK_YYYY_MM_DD_MASK = 'yyyy-MM-dd'
 
 BLOCK_TIMESTAMP = 'block_timestamp'
 BLOCK_TIMESTAMP_MONTH = 'block_timestamp_month'

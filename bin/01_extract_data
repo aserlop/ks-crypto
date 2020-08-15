@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# ----------------------------------------------------------------------------------------------------------------------
+#                                                   PARAMETERS
+# ----------------------------------------------------------------------------------------------------------------------
+DATE_END=$1
+NUM_PERIODS=$3
+PERIOD_UNIT=$4
+
+# Generic Config Spark
+APP_NAME="ks_crypto_extract_data"
+HDFS_FULL_PATH="/"
+HDFS_FULL_PATH_CHECKPOINT=${HDFS_FULL_PATH}"temp/"
+
+# Environment config
+ENV_NAME=p_ks_crypto
+DENV_FULL_PATH=../${ENV_NAME}.zip#DENV # Add #DENV at the end
+PYTHON_DENV_REL_PATH=./DENV/${ENV_NAME}/bin/python
+
+# Task config
+TASK_MODULE_REL_PATH="../ks_crypto/extract_data/task.py"
+PERIODS_PER_BATCH=1
+DROP_OUTPUT_TABLE=1
+HIVE_OUTPUT_FULL_TABLENAME="kschool-crypto:ks_crypto_dataset.transactions_flatten"
+
+# ----------------------------------------------------------------------------------------------------------------------
+#                                                   TASK
+# ----------------------------------------------------------------------------------------------------------------------
+
+## Launch Task
+PYSPARK_PYTHON="/envpath/bin/python" \
+spark-submit \
+--master yarn \
+--deploy-mode cluster \
+--name ${APP_NAME} \
+--conf spark.yarn.appMasterEnv.PYSPARK_PYTHON=${PYTHON_DENV_REL_PATH} \
+--conf spark.yarn.dist.archives=${DENV_FULL_PATH} \
+--conf spark.yarn.maxAppAttempts=1 \
+${TASK_MODULE_REL_PATH} \
+--end_date "${DATE_END}" \
+--output_tablename "${HIVE_OUTPUT_FULL_TABLENAME}" \
+--check_point ${HDFS_FULL_PATH_CHECKPOINT} \
+--num_periods ${NUM_PERIODS} \
+--period_unit ${PERIOD_UNIT} \
+--periods_per_batch ${PERIODS_PER_BATCH} \
+--drop_output_table ${DROP_OUTPUT_TABLE}

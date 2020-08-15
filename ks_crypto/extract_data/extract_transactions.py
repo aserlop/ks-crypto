@@ -2,21 +2,22 @@ from pyspark.sql import functions as F
 from ks_crypto.lib import constants as C
 
 
-def extract_transactions(spark, f_min, f_max):
+def extract_transactions(spark, f_min, f_max, danon_transactions_df=None):
     output_df = \
         build_reader_transactions(spark, f_min, f_max) \
-        .transform(lambda df: transform_transactions(df))
+        .transform(lambda df: transform_transactions(df, danon_transactions_df))
 
     return output_df
 
 
-def transform_transactions(input_df):
+def transform_transactions(input_df, danon_transactions_df):
 
     general_select_list = build_general_select_list()
 
     output_df = \
         input_df \
         .select(*general_select_list)\
+        .transform(lambda df: add_danon_data_to_transactions(df, danon_transactions_df))\
         .transform(explode_transactions_by_input_output)\
         .transform(explode_transactions_by_addresses)
 
@@ -37,6 +38,20 @@ def build_general_select_list():
         'outputs':               'outputs'
     }
     return [F.col(v).alias(k) for k, v in select_dic.items()]
+
+
+def add_danon_data_to_transactions(input_df, danon_transactions_df):
+
+    if danon_transactions_df is not None:
+
+        input_df = \
+            input_df \
+            .join(danon_transactions_df,
+                  on=[C.TRANSACTION_ID],
+                  how=C.LEFT)\
+            .fillna(0, ['is_deanonymized'])
+
+    return input_df
 
 
 def explode_transactions_by_input_output(input_df):
