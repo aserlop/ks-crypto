@@ -51,6 +51,7 @@ ${TASK_MODULE_REL_PATH} \
 --end_date "${DATE_END}" \
 --output_tablename "${HIVE_OUTPUT_FULL_TABLENAME}" \
 --check_point ${HDFS_FULL_PATH_CHECKPOINT} \
+--temp_bucket_name ${BUCKET_NAME} \
 --num_periods ${NUM_PERIODS} \
 --period_unit ${PERIOD_UNIT} \
 --periods_per_batch ${PERIODS_PER_BATCH} \

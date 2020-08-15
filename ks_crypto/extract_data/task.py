@@ -41,12 +41,14 @@ def main():
         periods_per_batch = args.periods_per_batch
         drop_output_table = args.drop_output_table
         hdfs_checkpoint_path = args.check_point
+        temp_bucket_name = args.temp_bucket_name
         output_tablename = args.output_tablename
 
         log_detalle.info(sys.version)
         log_detalle.info('Parametros:')
         log_detalle.info('> output_tablename: {}'.format(output_tablename))
         log_detalle.info('> check_point: {}'.format(hdfs_checkpoint_path))
+        log_detalle.info('> temp_bucket_name: {}'.format(temp_bucket_name))
         log_detalle.info('> f_max: {}'.format(f_max))
         log_detalle.info('> f_min: {}'.format(f_min))
         log_detalle.info('> period_unit: {}'.format(period_unit))
@@ -61,7 +63,8 @@ def main():
         conf = SparkConf() \
             .set("spark.executorEnv.PYTHONHASHSEED", "0") \
             .set("spark.sql.shuffle.partitions", "2048") \
-            .set("spark.driver.maxResultSize", "30G")
+            .set("spark.driver.maxResultSize", "30G") \
+            .set("temporaryGcsBucket", temp_bucket_name)
         sc = SparkContext(conf=conf)
         sc.setCheckpointDir(hdfs_checkpoint_path)
         spark = SparkSession.builder.appName(app_name).getOrCreate()
@@ -132,6 +135,8 @@ def get_configured_arg_parser():
                         help="el nombre completo de la tabla de salida")
     parser.add_argument('-c', '--check_point',
                         help='la ruta en HDFS donde almacenar los checkpoints')
+    parser.add_argument('-t', '--temp_bucket_name',
+                        help='bucket temporal necesario para escritura')
     parser.add_argument('-e', '--end_date',
                         help='la fecha de finalización del periodo de extracción (no incluida)')
     parser.add_argument('-n', '--num_periods', type=int,
