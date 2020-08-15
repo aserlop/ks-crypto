@@ -20,6 +20,7 @@ HDFS_FULL_PATH_CHECKPOINT=${HDFS_FULL_PATH}"temp/"
 ENV_NAME=p_ks_crypto
 DENV_FULL_PATH=/opt/conda/anaconda/envs/${ENV_NAME}.zip#DENV # Add #DENV at the end
 PYTHON_DENV_REL_PATH=./DENV/${ENV_NAME}/bin/python
+BQ_CONNECTOR_URI='gs://spark-lib/bigquery/spark-bigquery-latest_2.12.jar'
 
 # Task config
 TASK_MODULE_REL_PATH="../ks_crypto/extract_data/task.py"
@@ -37,6 +38,7 @@ gcloud dataproc jobs submit pyspark \
 --cluster=${CLUSTER_NAME} \
 --region=${REGION} \
 --bucket=${BUCKET_NAME} \
+--jars=${BQ_CONNECTOR_URI} \
 --properties="
 spark.master=yarn,
 spark.submit.deployMode=cluster,

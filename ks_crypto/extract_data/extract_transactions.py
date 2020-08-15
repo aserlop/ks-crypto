@@ -37,7 +37,7 @@ def build_general_select_list():
         'inputs':                'inputs',
         'outputs':               'outputs'
     }
-    return [F.col(v).alias(k) for k, v in select_dic.items()]
+    return [F.col(k).alias(v) for k, v in select_dic.items()]
 
 
 def add_danon_data_to_transactions(input_df, danon_transactions_df):
