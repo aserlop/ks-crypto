@@ -12,7 +12,7 @@ REGION=europe-west2
 
 # dates
 DATE_END='2017-10-01'
-NUM_PERIODS=30
+NUM_PERIODS=1
 PERIOD_UNIT='days'
 
 
