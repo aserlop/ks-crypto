@@ -18,7 +18,7 @@ HDFS_FULL_PATH_CHECKPOINT=${HDFS_FULL_PATH}"temp/"
 
 # Environment config
 ENV_NAME=p_ks_crypto
-DENV_FULL_PATH=../${ENV_NAME}.zip#DENV # Add #DENV at the end
+DENV_FULL_PATH=/opt/conda/anaconda/envs/${ENV_NAME}.zip#DENV # Add #DENV at the end
 PYTHON_DENV_REL_PATH=./DENV/${ENV_NAME}/bin/python
 
 # Task config
