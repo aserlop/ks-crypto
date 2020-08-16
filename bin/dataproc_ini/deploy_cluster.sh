@@ -34,5 +34,5 @@ gcloud dataproc clusters create \
   --enable-component-gateway \
   --metadata 'PIP_PACKAGES=google-cloud-bigquery google-cloud-storage' \
   --initialization-actions="${INI_BASE_GS_PATH}/pip_install.sh,${INI_BASE_GS_PATH}/bootstrap.sh" \
-  --properties="spark.executor.cores=${NUM_CORES_PER_WORKER}"
+  --properties="spark:spark.executor.cores=${NUM_CORES_PER_WORKER}"
 
