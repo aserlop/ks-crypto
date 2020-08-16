@@ -13,7 +13,8 @@ MASTER_MACHINE_TYPE=n1-standard-4
 NUM_MASTERS=1
 MASTER_DISK_SIZE=100GB
 WORKER_MACHINE_TYPE=n1-standard-4
-NUM_WORKERS=2
+NUM_WORKERS=20
+NUM_CORES_PER_WORKER=4
 WORKER_DISK_SIZE=50GB
 
 # Create cluster
@@ -32,5 +33,6 @@ gcloud dataproc clusters create \
   --optional-components=ANACONDA,JUPYTER \
   --enable-component-gateway \
   --metadata 'PIP_PACKAGES=google-cloud-bigquery google-cloud-storage' \
-  --initialization-actions="${INI_BASE_GS_PATH}/pip_install.sh,${INI_BASE_GS_PATH}/bootstrap.sh"
+  --initialization-actions="${INI_BASE_GS_PATH}/pip_install.sh,${INI_BASE_GS_PATH}/bootstrap.sh" \
+  --properties="spark.executor.cores=${NUM_CORES_PER_WORKER}"
 
