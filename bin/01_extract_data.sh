@@ -26,7 +26,7 @@ GF_PACKAGE='graphframes:graphframes:0.8.0-spark3.0-s_2.12'
 # Task config
 TASK_MODULE_REL_PATH="../ks_crypto/extract_data/task.py"
 PERIODS_PER_BATCH=1
-DROP_OUTPUT_TABLE=0
+DROP_OUTPUT_TABLE=1
 HIVE_OUTPUT_FULL_TABLENAME="kschool-crypto:ks_crypto_dataset.transactions_flatten"
 
 # ----------------------------------------------------------------------------------------------------------------------

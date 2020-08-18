@@ -13,7 +13,7 @@ BQ_PUB_DATA_PROJ = 'bigquery-public-data'
 BITCOIN_DS = 'crypto_bitcoin'
 
 F_MIN = '2016-01-01'  # included
-F_MAX = '2017-10-01'  # not included
+F_MAX = '2017-11-01'  # not included
 
 PY_YYYYMMDD_MASK = '%Y%m%d'
 PY_YYYY_MM_DD_MASK = '%Y-%m-%d'
