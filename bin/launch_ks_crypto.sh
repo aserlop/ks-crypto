@@ -12,8 +12,8 @@ REGION=europe-west2
 
 # dates
 DATE_END='2017-10-02'
-NUM_PERIODS=578
-PERIOD_UNIT='days'
+NUM_PERIODS=22
+PERIOD_UNIT='months'
 
 
 # ----------------------------------------------------------------------------------------------------------------------
