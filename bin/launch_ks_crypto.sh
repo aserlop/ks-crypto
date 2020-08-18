@@ -11,9 +11,9 @@ CLUSTER_NAME=ks-crypto-cluster
 REGION=europe-west2
 
 # dates
-DATE_END='2017-10-01'
-NUM_PERIODS=2
-PERIOD_UNIT='months'
+DATE_END='2017-10-02'
+NUM_PERIODS=578
+PERIOD_UNIT='days'
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -21,8 +21,8 @@ PERIOD_UNIT='months'
 # ----------------------------------------------------------------------------------------------------------------------
 
 # Create a dataproc
-./00_start_dataproc.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} # && \
+# ./00_start_dataproc.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} # && \
 
-#./01_extract_data.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT}
+./01_extract_data.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT}
 
 
