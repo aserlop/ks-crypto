@@ -11,8 +11,8 @@ CLUSTER_NAME=ks-crypto-cluster
 REGION=europe-west2
 
 # dates
-DATE_END='2017-10-02'
-NUM_PERIODS=22
+DATE_END='2017-08-02'
+NUM_PERIODS=20
 PERIOD_UNIT='months'
 
 
