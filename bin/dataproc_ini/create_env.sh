@@ -7,9 +7,7 @@ conda create -n $ENV_NAME python=3.7
 conda activate $ENV_NAME
 # shellcheck disable=SC2164
 cd /home/ks-crypto
-python setup_graphframes.py clean
 pip install setup_graphframes.py
-python setup.py clean
 pip install setup.py
 
 # Create zip with environment to distribute in executors
