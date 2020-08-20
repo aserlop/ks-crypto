@@ -21,8 +21,12 @@ PERIOD_UNIT='months'
 # ----------------------------------------------------------------------------------------------------------------------
 
 # Create a dataproc
-./00_start_dataproc.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} # && \
+./00_start_dataproc.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} && \
 
-# ./01_extract_data.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT}
+# Extract data
+# ./01_extract_data.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT} # && \
+
+# Filter data
+./02_filter_data.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT}
 
 
