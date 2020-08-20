@@ -11,6 +11,7 @@ import ks_crypto.lib.constants as C
 import ks_crypto.lib.spark_utils as su
 from ks_crypto import str2bool
 from ks_crypto.lib.log_generation import get_logs
+from ks_crypto.filter_data.filter_data import filter_data
 
 
 def main():
@@ -60,13 +61,10 @@ def main():
             .set("spark.executorEnv.PYTHONHASHSEED", "0") \
             .set("spark.sql.shuffle.partitions", "2048") \
             .set("spark.driver.maxResultSize", "30G") \
-            .set('spark.jars.packages', 'graphframes:graphframes:0.8.0-spark3.0-s_2.12') \
             .set("temporaryGcsBucket", temp_bucket_name)
         sc = SparkContext(conf=conf)
         sc.setCheckpointDir(hdfs_checkpoint_path)
         spark = SparkSession.builder.appName(app_name).getOrCreate()
-
-        from ks_crypto.filter_data.filter_data import filter_data
 
         log_detalle.info('Parametros de la configuracion de spark:')
         for key, value in conf.getAll():

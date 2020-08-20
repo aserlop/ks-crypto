@@ -14,3 +14,9 @@ setup(
     install_requires=install_requires,
     package_data={'ks_crypto': []},
 )
+
+setup(name='graphframes',
+version='0.5.10',
+packages=['graphframes', 'graphframes.lib']
+)
+
