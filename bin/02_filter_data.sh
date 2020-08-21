@@ -21,7 +21,8 @@ ENV_NAME=p_ks_crypto
 DENV_FULL_PATH=/opt/conda/anaconda/envs/${ENV_NAME}.zip#DENV # Add #DENV at the end
 PYTHON_DENV_REL_PATH=./DENV/${ENV_NAME}/bin/python
 BQ_CONNECTOR_URI='gs://spark-lib/bigquery/spark-bigquery-latest_2.12.jar'
-GF_PACKAGE='graphframes:graphframes:0.8.0-spark3.0-s_2.12'
+GF_PACKAGE='gs://ks-crypto/graphframes-0.8.0-spark3.0-s_2.12.jar'
+# GF_PACKAGE='graphframes:graphframes:0.8.0-spark3.0-s_2.12'
 
 # Task config
 TASK_MODULE_REL_PATH="../ks_crypto/filter_data/task.py"
@@ -39,12 +40,11 @@ gcloud dataproc jobs submit pyspark \
 --cluster=${CLUSTER_NAME} \
 --region=${REGION} \
 --bucket=${BUCKET_NAME} \
---jars=${BQ_CONNECTOR_URI} \
+--jars="${BQ_CONNECTOR_URI},${GF_PACKAGE}" \
 --properties="
 spark.master=yarn,
 spark.submit.deployMode=cluster,
 spark.app.name=${APP_NAME},
-spark.jars.packages=${GF_PACKAGE},
 yarn:spark.yarn.appMasterEnv.PYSPARK_PYTHON=${PYTHON_DENV_REL_PATH},
 yarn:spark.yarn.maxAppAttempts=1,
 yarn:spark.yarn.dist.archives=${DENV_FULL_PATH}" \

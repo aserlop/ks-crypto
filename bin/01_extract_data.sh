@@ -44,7 +44,7 @@ gcloud dataproc jobs submit pyspark \
 spark.master=yarn,
 spark.submit.deployMode=cluster,
 spark.app.name=${APP_NAME},
-spark.jars.packages=${GF_PACKAGE},\
+spark.jars.packages=${GF_PACKAGE},
 yarn:spark.yarn.appMasterEnv.PYSPARK_PYTHON=${PYTHON_DENV_REL_PATH},
 yarn:spark.yarn.maxAppAttempts=1,
 yarn:spark.yarn.dist.archives=${DENV_FULL_PATH}" \
