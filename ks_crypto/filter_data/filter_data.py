@@ -56,9 +56,10 @@ def add_is_inside_danon_community(input_df):
               on=[C.INPUT_ADDRESS_ID],
               how=C.LEFT) \
         .join(communities_output_df,
-              on=[C.INPUT_ADDRESS_ID],
+              on=[C.OUTPUT_ADDRESS_ID],
               how=C.LEFT) \
-        .withColumn('is_inside_danon_community')\
+        .withColumn('is_inside_danon_community',
+                    F.greatest('is_inside_danon_community_output', 'is_inside_danon_community_input'))\
         .drop(*aux_columns)
 
     return output_df
