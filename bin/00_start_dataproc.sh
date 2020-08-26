@@ -4,8 +4,7 @@ ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME}
 CLUSTER_NAME=$1
 REGION=$2
 BUCKET_NAME=$3
-
-ZONE=europe-west2-b
+ZONE=$4
 
 echo "Enabling services config..."
 gcloud services enable \
