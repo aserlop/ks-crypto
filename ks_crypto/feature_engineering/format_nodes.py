@@ -1,5 +1,5 @@
 from ks_crypto.lib import constants as C
-from pyspark.sql import functions as F
+from pyspark.sql import functions as F, types as T
 
 
 def transform_to_node_format(input_df):
@@ -80,6 +80,6 @@ def build_nodes_agg_fun_list(dtypes):
       F.count:         count_colname_list + count_dist_colname_list,
       F.countDistinct: count_colname_list
     }
-    return [k(c).alias(k.__name__ + '_' + c) for k, v in dic_fun.items() for c in v]
+    return [k(c).cast(T.DoubleType()).alias(k.__name__ + '_' + c) for k, v in dic_fun.items() for c in v]
 
 

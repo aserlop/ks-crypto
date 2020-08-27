@@ -96,6 +96,8 @@ def main():
             transactions_df \
             .transform(transform_to_node_format)
 
+        log_detalle.info("Conteo del tablon de nodos {count}".format(count=nodes_df.count()))
+
         log_detalle.info("Inicio del guardado del dataset. Tabla: {}".format(t_output_tablename))
 
         if drop_output_table:
