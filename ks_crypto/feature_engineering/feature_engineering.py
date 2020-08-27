@@ -32,7 +32,10 @@ def add_indexes_to_addresses(input_df):
     address_df = \
         input_addresses_df \
         .unionByName(output_addresses_df) \
-        .dropDuplicates([C.ADDRESS_ID])
+        .dropDuplicates([C.ADDRESS_ID])\
+        .persist()
+
+    address_df.count()
 
     i_address_df = \
         indexer.fit(address_df).transform(address_df)
