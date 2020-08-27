@@ -19,8 +19,6 @@ def parse_class(input_df):
 
 def add_indexes_to_addresses(input_df):
 
-    indexer = StringIndexer(inputCol=C.ADDRESS_ID, outputCol=C.I_ADDRESS_ID)
-
     input_addresses_df = \
         input_df \
         .select(F.col(C.INPUT_ADDRESS_ID).alias(C.ADDRESS_ID))
@@ -29,16 +27,14 @@ def add_indexes_to_addresses(input_df):
         input_df \
         .select(F.col(C.OUTPUT_ADDRESS_ID).alias(C.ADDRESS_ID))
 
-    address_df = \
+    i_address_df = \
         input_addresses_df \
         .unionByName(output_addresses_df) \
         .dropDuplicates([C.ADDRESS_ID])\
+        .withColumn(C.I_ADDRESS_ID, F.monotonically_increasing_id().cast('int'))\
         .persist()
 
-    address_df.count()
-
-    i_address_df = \
-        indexer.fit(address_df).transform(address_df)
+    i_address_df.count()
 
     input_i_address_df = \
         i_address_df\
