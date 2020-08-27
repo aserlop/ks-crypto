@@ -67,19 +67,19 @@ def add_is_inside_danon_community(input_df):
 
 def transform_to_vertex(input_df):
 
-    input_adresses_df = \
+    input_addresses_df = \
         input_df \
         .select(F.col(C.INPUT_ADDRESS_ID).alias(C.ID),
                 'is_deanonymized')
 
-    output_adresses_df = \
+    output_addresses_df = \
         input_df \
         .select(F.col(C.OUTPUT_ADDRESS_ID).alias(C.ID),
                 'is_deanonymized')
 
     output_df = \
-        input_adresses_df \
-        .unionByName(output_adresses_df) \
+        input_addresses_df \
+        .unionByName(output_addresses_df) \
         .dropDuplicates([C.ID]) \
         .repartition(256) \
         .persist()
@@ -139,14 +139,14 @@ def build_period_block_timestamp_dic(input_df, old_num_hours, new_num_hours):
 
     period_df = \
         input_df \
-            .filter(F.col('is_deanonymized') == 1) \
-            .withColumn(f'lag_{C.BLOCK_TIMESTAMP}', F.lag(C.BLOCK_TIMESTAMP).over(w_ord)) \
-            .withColumn('is_first_in_period', F.when(is_more_hours_lag_cond, 1).otherwise(0)) \
-            .withColumn('is_first_in_period', F.max('is_first_in_period').over(w_id)) \
-            .dropDuplicates([C.BLOCK_TIMESTAMP, 'is_first_in_period']) \
-            .filter(F.col('is_first_in_period') == 1) \
-            .select(*final_cols_list) \
-            .toPandas()
+        .filter(F.col('is_deanonymized') == 1) \
+        .withColumn(f'lag_{C.BLOCK_TIMESTAMP}', F.lag(C.BLOCK_TIMESTAMP).over(w_ord)) \
+        .withColumn('is_first_in_period', F.when(is_more_hours_lag_cond, 1).otherwise(0)) \
+        .withColumn('is_first_in_period', F.max('is_first_in_period').over(w_id)) \
+        .dropDuplicates([C.BLOCK_TIMESTAMP, 'is_first_in_period']) \
+        .filter(F.col('is_first_in_period') == 1) \
+        .select(*final_cols_list) \
+        .toPandas()
 
     dic = {int(period_df['period'][i]): [period_df['f_min_period'][i], period_df['f_max_period'][i]]
            for i in period_df.index.values.tolist()}
