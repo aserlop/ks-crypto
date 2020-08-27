@@ -1,7 +1,7 @@
 from ks_crypto.lib import constants as C, spark_utils as su
 from pyspark.ml.feature import StringIndexer
 from pyspark.sql import functions as F
-
+from pyspark.sql.window import Window
 
 def feature_engineering(input_df):
 
@@ -27,11 +27,13 @@ def add_indexes_to_addresses(input_df):
         input_df \
         .select(F.col(C.OUTPUT_ADDRESS_ID).alias(C.ADDRESS_ID))
 
+    w_ord = Window.orderBy(C.ADDRESS_ID)
+
     i_address_df = \
         input_addresses_df \
         .unionByName(output_addresses_df) \
         .dropDuplicates([C.ADDRESS_ID])\
-        .withColumn(C.I_ADDRESS_ID, F.monotonically_increasing_id().cast('int'))\
+        .withColumn(C.I_ADDRESS_ID, F.row_number().over(w_ord).cast('int'))\
         .persist()
 
     i_address_df.count()
