@@ -12,7 +12,8 @@ import ks_crypto.lib.spark_utils as su
 from ks_crypto import str2bool
 from ks_crypto.lib.log_generation import get_logs
 from ks_crypto.feature_engineering.feature_engineering import feature_engineering
-from ks_crypto.feature_engineering.data_aggregation import data_aggregation_by_period
+from ks_crypto.feature_engineering.format_transactions import transactions_aggregation_by_period
+from ks_crypto.feature_engineering.format_nodes import transform_to_node_format
 
 
 def main():
@@ -40,12 +41,14 @@ def main():
         hdfs_checkpoint_path = args.check_point
         temp_bucket_name = args.temp_bucket_name
         input_tablename = args.input_tablename
-        output_tablename = args.output_tablename
+        t_output_tablename = args.t_output_tablename
+        n_output_tablename = args.n_output_tablename
 
         log_detalle.info(sys.version)
         log_detalle.info('Parametros:')
         log_detalle.info('> input_tablename: {}'.format(input_tablename))
-        log_detalle.info('> output_tablename: {}'.format(output_tablename))
+        log_detalle.info('> t_output_tablename: {}'.format(t_output_tablename))
+        log_detalle.info('> n_output_tablename: {}'.format(n_output_tablename))
         log_detalle.info('> check_point: {}'.format(hdfs_checkpoint_path))
         log_detalle.info('> temp_bucket_name: {}'.format(temp_bucket_name))
         log_detalle.info('> f_max: {}'.format(f_max))
@@ -81,22 +84,38 @@ def main():
 
         log_detalle.info("Conteo del tablon inicial {count}".format(count=tablon_df.count()))
 
-        tablon_df = \
+        transactions_df = \
             tablon_df\
             .transform(feature_engineering)\
-            .transform(data_aggregation_by_period)
+            .transform(transactions_aggregation_by_period)\
+            .persist()
 
-        log_detalle.info("Conteo del tablon final {count}".format(count=tablon_df.count()))
+        log_detalle.info("Conteo del tablon de transacciones {count}".format(count=transactions_df.count()))
 
-        log_detalle.info("Inicio del guardado del dataset. Tabla Hive: {}".format(output_tablename))
+        nodes_df = \
+            transactions_df \
+            .transform(transform_to_node_format)
+
+        log_detalle.info("Inicio del guardado del dataset. Tabla: {}".format(t_output_tablename))
 
         if drop_output_table:
             # Para crear una tabla nueva
-            su.export_to_big_query(tablon_df, output_tablename, mode='overwrite',
+            su.export_to_big_query(transactions_df, t_output_tablename, mode='overwrite',
                                    partition_by=C.BLOCK_TIMESTAMP_MONTH)
         else:
             # Para añadir a una tabla ya existente
-            su.export_to_big_query(tablon_df, output_tablename, mode='append',
+            su.export_to_big_query(transactions_df, t_output_tablename, mode='append',
+                                   partition_by=C.BLOCK_TIMESTAMP_MONTH)
+
+        log_detalle.info("Inicio del guardado del dataset. Tabla: {}".format(n_output_tablename))
+
+        if drop_output_table:
+            # Para crear una tabla nueva
+            su.export_to_big_query(nodes_df, n_output_tablename, mode='overwrite',
+                                   partition_by=C.BLOCK_TIMESTAMP_MONTH)
+        else:
+            # Para añadir a una tabla ya existente
+            su.export_to_big_query(nodes_df, n_output_tablename, mode='append',
                                    partition_by=C.BLOCK_TIMESTAMP_MONTH)
 
         # --------------------------------------------------------------------------------------------------------------
@@ -116,19 +135,23 @@ def main():
 
 def get_configured_arg_parser():
     default_input_tablename = 'kschool-crypto:ks_crypto_dataset.transactions_flatten_filt'
-    default_output_tablename = 'kschool-crypto:ks_crypto_dataset.transactions_flatten_filt_ft'
+    default_t_output_tablename = 'kschool-crypto:ks_crypto_dataset.transactions_ft'
+    default_n_output_tablename = 'kschool-crypto:ks_crypto_dataset.nodes_ft'
     default_drop_output_table = False
 
     parser = argparse.ArgumentParser(description='Filtrado del tablon con ingenieria de variables')
     parser.add_argument('-i', '--input_tablename',
                         default=default_input_tablename,
                         help="el nombre completo de la tabla de entrada")
-    parser.add_argument('-o', '--output_tablename',
-                        default=default_output_tablename,
-                        help="el nombre completo de la tabla de salida")
+    parser.add_argument('-t', '--t_output_tablename',
+                        default=default_t_output_tablename,
+                        help="el nombre completo de la tabla de salida de transacciones")
+    parser.add_argument('-o', '--n_output_tablename',
+                        default=default_n_output_tablename,
+                        help="el nombre completo de la tabla de salida de transacciones")
     parser.add_argument('-c', '--check_point',
                         help='la ruta en HDFS donde almacenar los checkpoints')
-    parser.add_argument('-t', '--temp_bucket_name',
+    parser.add_argument('-b', '--temp_bucket_name',
                         help='bucket temporal necesario para escritura')
     parser.add_argument('-e', '--end_date',
                         help='la fecha de finalización del periodo de extracción (no incluida)')

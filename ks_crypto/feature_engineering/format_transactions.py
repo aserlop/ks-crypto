@@ -4,7 +4,7 @@ from pyspark.sql import functions as F
 from pyspark.sql.window import Window
 
 
-def data_aggregation_by_period(input_df):
+def transactions_aggregation_by_period(input_df):
 
     group_columns = [
         C.I_INPUT_ADDRESS_ID,  C.INPUT_ADDRESS_ID,
@@ -14,7 +14,7 @@ def data_aggregation_by_period(input_df):
     w_ord = Window.partitionBy(*group_columns).orderBy(C.BLOCK_TIMESTAMP)
 
     agg_fun_list = \
-        build_agg_fun_list() + \
+        build_transactions_agg_fun_list() + \
         [F.max(C.CLASS).alias(C.CLASS), F.min(C.BLOCK_TIMESTAMP_MONTH).alias(C.BLOCK_TIMESTAMP_MONTH)]
 
     output_df = \
@@ -31,7 +31,7 @@ def data_aggregation_by_period(input_df):
     return output_df
 
 
-def build_agg_fun_list():
+def build_transactions_agg_fun_list():
 
     continuous_colname_list = [
         'total_input_count', 'total_output_count', 'total_input_value', 'total_output_value', 'total_fee',
