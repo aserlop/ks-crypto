@@ -62,6 +62,7 @@ def main():
             .set("spark.executorEnv.PYTHONHASHSEED", "0") \
             .set("spark.sql.shuffle.partitions", "2048") \
             .set("spark.driver.maxResultSize", "30G") \
+            .set("spark.kryoserializer.buffer.max.mb", '256m') \
             .set("temporaryGcsBucket", temp_bucket_name)
         sc = SparkContext(conf=conf)
         sc.setCheckpointDir(hdfs_checkpoint_path)
