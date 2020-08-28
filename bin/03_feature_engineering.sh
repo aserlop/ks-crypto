@@ -29,7 +29,7 @@ TASK_MODULE_REL_PATH="../ks_crypto/feature_engineering/task.py"
 DROP_OUTPUT_TABLE=1
 HIVE_INPUT_FULL_TABLENAME="kschool-crypto:ks_crypto_dataset.transactions_flatten_filt"
 T_HIVE_OUTPUT_FULL_TABLENAME="kschool-crypto:ks_crypto_dataset.transactions_ft"
-N_HIVE_OUTPUT_FULL_TABLENAME="kschool-crypto:ks_crypto_dataset.nodes_df"
+N_HIVE_OUTPUT_FULL_TABLENAME="kschool-crypto:ks_crypto_dataset.nodes_ft"
 
 # ----------------------------------------------------------------------------------------------------------------------
 #                                                   TASK
