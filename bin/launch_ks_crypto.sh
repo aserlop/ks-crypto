@@ -31,6 +31,8 @@ PERIOD_UNIT='months'
 # ./02_filter_data.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT} # && \
 
 # Feature engineering
-./03_feature_engineering.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT}
+./03_feature_engineering.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT} # && \
 
+# Close dataproc
+# ./04_close_dataproc.sh ${CLUSTER_NAME} ${REGION}
 

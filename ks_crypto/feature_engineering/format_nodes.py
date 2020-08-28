@@ -27,6 +27,7 @@ def combine_input_output_nodes(input_df):
         .select(F.col(C.I_INPUT_ADDRESS_ID).alias(C.I_ADDRESS_ID),
                 C.PERIOD,
                 C.BLOCK_TIMESTAMP_MONTH,
+                C.CLASS,
                 *input_renamed_col_list)
 
     output_nodes_df = \
@@ -34,6 +35,7 @@ def combine_input_output_nodes(input_df):
         .select(F.col(C.I_OUTPUT_ADDRESS_ID).alias(C.I_ADDRESS_ID),
                 C.PERIOD,
                 C.BLOCK_TIMESTAMP_MONTH,
+                C.CLASS,
                 *output_renamed_col_list)
 
     not_in_input_col_list = [F.lit(None).alias(c) for c in output_nodes_df.columns if c not in input_nodes_df.columns]
@@ -53,7 +55,8 @@ def nodes_aggregation_by_period(input_df):
         input_df \
         .groupBy('i_address', 'period') \
         .agg(*build_nodes_agg_fun_list(input_df.dtypes),
-             F.min(C.BLOCK_TIMESTAMP_MONTH).alias(C.BLOCK_TIMESTAMP_MONTH)) \
+             F.min(C.BLOCK_TIMESTAMP_MONTH).alias(C.BLOCK_TIMESTAMP_MONTH),
+             F.max(C.CLASS).alias(C.CLASS)) \
         .fillna(0)
 
     return output_df

@@ -1,5 +1,4 @@
-
-${CLUSTER_NAME} ${REGION} ${BUCKET_NAME}
+#!/usr/bin/env bash
 
 CLUSTER_NAME=$1
 REGION=$2
