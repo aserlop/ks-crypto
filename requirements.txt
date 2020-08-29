@@ -20,6 +20,7 @@ pandas-profiling==2.8.0
 pyarrow==0.15.1
 pyspark==3.0.0
 tornado<6.0.0
+torch
 scikit-learn==0.23.2
 seaborn==0.10.1
 plotly==4.5.
