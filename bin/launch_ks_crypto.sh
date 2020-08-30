@@ -22,7 +22,7 @@ PERIOD_UNIT='months'
 # ----------------------------------------------------------------------------------------------------------------------
 
 # Create a dataproc
-./00_start_dataproc.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${ZONE} && \
+./00_start_dataproc.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${ZONE} # && \
 
 # Extract data
 # ./01_extract_data.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT} # && \
@@ -31,7 +31,7 @@ PERIOD_UNIT='months'
 # ./02_filter_data.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT} # && \
 
 # Feature engineering
-./03_feature_engineering.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT} # && \
+# ./03_feature_engineering.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT} # && \
 
 # Close dataproc
 # ./04_close_dataproc.sh ${CLUSTER_NAME} ${REGION}

@@ -12,7 +12,7 @@ import numpy as np
 import random
 
 import ks_crypto.lib.constants as C
-import ks_crypto.lib.spark_utils as su
+import ks_crypto.lib.modeling_utils as mu
 from ks_crypto import str2bool
 from ks_crypto.lib.log_generation import get_logs
 from ks_crypto.modeling.torch_data_provider import TorchGraphDataProvider
@@ -113,6 +113,8 @@ def main():
         args_dic['seed'] = seed
         args_dic['rank'] = rank
         args_dic['wsize'] = wsize
+
+        args_dic = mu.build_random_hyper_params(args_dic)
 
         # --------------------------------------------------------------------------------------------------------------
         # Ejecucion principal
