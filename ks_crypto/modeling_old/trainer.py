@@ -9,8 +9,8 @@ import os
 
 
 class Trainer:
-    def __init__(self, args_dic, splitter, gcn, classifier, comp_loss, dataset, num_classes, logging, spark,
-                 drop_output_table):
+    def __init__(self, args_dic, splitter, gcn, classifier, comp_loss, dataset, num_classes, logging, spark=None,
+                 drop_output_table=None):
         self.args_dic = args_dic
         self.splitter = splitter
         self.tasker = splitter.tasker
@@ -27,7 +27,7 @@ class Trainer:
 
         self.init_optimizers(args_dic)
 
-        self.spark = spark
+        # self.spark = spark
         self.drop_output_table = drop_output_table
 
         if self.tasker.is_static:
@@ -181,18 +181,18 @@ class Trainer:
         adj['vals'] = adj['vals'][0]
         return adj
 
-    def save_node_embs_csv(self, nodes_embs, indexes, embs_tablename):
-        csv_node_embs = []
-        for node_id in indexes:
-            orig_ID = torch.DoubleTensor([self.tasker.data.contID_to_origID[node_id]])
-
-            csv_node_embs.append(torch.cat((orig_ID, nodes_embs[node_id].double())).detach().numpy())
-
-        embs_df = self.spark.createDataFrame(pd.DataFrame(np.array(csv_node_embs)))\
-
-        if self.drop_output_table:
-             # Para crear una tabla nueva
-             su.export_to_big_query(embs_df, embs_tablename, mode='overwrite')
-        else:
-             # Para añadir a una tabla ya existente
-             su.export_to_big_query(embs_df, embs_tablename, mode='append')
+    # def save_node_embs_csv(self, nodes_embs, indexes, embs_tablename):
+    #     csv_node_embs = []
+    #     for node_id in indexes:
+    #         orig_ID = torch.DoubleTensor([self.tasker.data.contID_to_origID[node_id]])
+    #
+    #         csv_node_embs.append(torch.cat((orig_ID, nodes_embs[node_id].double())).detach().numpy())
+    #
+    #     embs_df = self.spark.createDataFrame(pd.DataFrame(np.array(csv_node_embs)))\
+    #
+    #     if self.drop_output_table:
+    #          # Para crear una tabla nueva
+    #          su.export_to_big_query(embs_df, embs_tablename, mode='overwrite')
+    #     else:
+    #          # Para añadir a una tabla ya existente
+    #          su.export_to_big_query(embs_df, embs_tablename, mode='append')

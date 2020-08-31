@@ -27,9 +27,9 @@ GF_PACKAGE='gs://ks-crypto/graphframes-0.8.0-spark3.0-s_2.12.jar'
 # Task config
 TASK_MODULE_REL_PATH="../ks_crypto/feature_engineering/task.py"
 DROP_OUTPUT_TABLE=1
-HIVE_INPUT_FULL_TABLENAME="kschool-crypto:ks_crypto_dataset.transactions_flatten_filt"
-T_HIVE_OUTPUT_FULL_TABLENAME="kschool-crypto:ks_crypto_dataset.transactions_ft"
-N_HIVE_OUTPUT_FULL_TABLENAME="kschool-crypto:ks_crypto_dataset.nodes_ft"
+BQ_INPUT_FULL_TABLENAME="kschool-crypto:ks_crypto_dataset.transactions_flatten_filt"
+T_BQ_OUTPUT_FULL_TABLENAME="kschool-crypto:ks_crypto_dataset.transactions_ft"
+N_BQ_OUTPUT_FULL_TABLENAME="kschool-crypto:ks_crypto_dataset.nodes_ft"
 
 # ----------------------------------------------------------------------------------------------------------------------
 #                                                   TASK
@@ -52,9 +52,9 @@ yarn:spark.yarn.dist.archives=${DENV_FULL_PATH}" \
 ${TASK_MODULE_REL_PATH} \
 -- \
 --end_date "${DATE_END}" \
---input_tablename "${HIVE_INPUT_FULL_TABLENAME}" \
---t_output_tablename "${T_HIVE_OUTPUT_FULL_TABLENAME}" \
---n_output_tablename "${N_HIVE_OUTPUT_FULL_TABLENAME}" \
+--input_tablename "${BQ_INPUT_FULL_TABLENAME}" \
+--t_output_tablename "${T_BQ_OUTPUT_FULL_TABLENAME}" \
+--n_output_tablename "${N_BQ_OUTPUT_FULL_TABLENAME}" \
 --check_point ${HDFS_FULL_PATH_CHECKPOINT} \
 --temp_bucket_name ${BUCKET_NAME} \
 --num_periods ${NUM_PERIODS} \
