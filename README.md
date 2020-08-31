@@ -8,6 +8,7 @@
   * [Prerequisites](#prerequisites)
   * [Launch](#launch)
 * [Roadmap](#roadmap)
+* [Contributing](#contributing)
 * [Project Report](#project-report)
 * [Process Diagrams](#process-diagrams)
 
