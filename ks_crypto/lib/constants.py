@@ -102,59 +102,59 @@ PERIOD_DIC = {
     47: ['2017-09-07 03:20:23', '2017-09-07 09:20:23'],
     48: ['2017-09-19 00:54:47', '2017-09-19 06:54:47'],
     49: ['2017-10-02 16:58:52',	'2017-10-02 19:57:31']}
-
-MODEL_PARAMS_DIC = {
-    'device': 'cpu',
-    'use_cuda': True,
-    'use_logfile': True,
-
-    'class_weights': [ 0.25, 0.75],
-    'use_2_hot_node_feats': False,
-    'use_1_hot_node_feats': False,
-    'save_node_embeddings': True,
-
-    'train_proportion': 0.65,
-    'dev_proportion': 0.1,
-    'num_epochs': 1000,
-    'steps_accum_gradients': 1,
-    'learning_rate': 0.001,
-    'learning_rate_min': 0.001,
-    'learning_rate_max': 0.02,
-    'negative_mult_training': 20,
-    'negative_mult_test': 100,
-    'smart_neg_sampling': False,
-    'seed': SEED,
-    'target_measure': 'F1',  # measure to define the best epoch F1, Precision, Recall, MRR, MAP
-    'target_class': 1,  # Target class to get the measure to define the best epoch (all, 0, 1)
-    'early_stop_patience': 100,
-
-    'eval_after_epochs': 5,
-    'adj_mat_time_window': 1,  # Time window to create the adj matrix for each timestep.
-    'adj_mat_time_window_min': 1,
-    'adj_mat_time_window_max': 10,
-    'num_hist_steps': 5,  # number of previous steps used for prediction
-    'num_hist_steps_min': 3,  # only used if num_hist_steps: None
-    'num_hist_steps_max': 10,  # only used if num_hist_steps: None
-
-    'feats_per_node': 50,
-    'feats_per_node_min': 30,
-    'feats_per_node_max': 312,
-    'layer_1_feats': 76,
-    'layer_1_feats_min': 30,
-    'layer_1_feats_max': 500,
-    'layer_2_feats': None,
-    'layer_2_feats_same_as_l1': True,
-    'k_top_grcu': 200,
-    'num_layers': 2,
-    'lstm_l1_layers': 1,
-    'lstm_l1_feats': 125,
-    'lstm_l1_feats_min': 50,
-    'lstm_l1_feats_max': 500,
-    'lstm_l2_layers': 1,
-    'lstm_l2_feats': 400,
-    'lstm_l2_feats_same_as_l1': True,
-    'cls_feats': 510,
-    'cls_feats_min': 100,
-    'cls_feats_max': 700
-}
+#
+# MODEL_PARAMS_DIC = {
+#     'device': 'cpu',
+#     'use_cuda': True,
+#     'use_logfile': True,
+#
+#     'class_weights': [ 0.25, 0.75],
+#     'use_2_hot_node_feats': False,
+#     'use_1_hot_node_feats': False,
+#     'save_node_embeddings': True,
+#
+#     'train_proportion': 0.65,
+#     'dev_proportion': 0.1,
+#     'num_epochs': 1000,
+#     'steps_accum_gradients': 1,
+#     'learning_rate': 0.001,
+#     'learning_rate_min': 0.001,
+#     'learning_rate_max': 0.02,
+#     'negative_mult_training': 20,
+#     'negative_mult_test': 100,
+#     'smart_neg_sampling': False,
+#     'seed': SEED,
+#     'target_measure': 'F1',  # measure to define the best epoch F1, Precision, Recall, MRR, MAP
+#     'target_class': 1,  # Target class to get the measure to define the best epoch (all, 0, 1)
+#     'early_stop_patience': 100,
+#
+#     'eval_after_epochs': 5,
+#     'adj_mat_time_window': 1,  # Time window to create the adj matrix for each timestep.
+#     'adj_mat_time_window_min': 1,
+#     'adj_mat_time_window_max': 10,
+#     'num_hist_steps': 5,  # number of previous steps used for prediction
+#     'num_hist_steps_min': 3,  # only used if num_hist_steps: None
+#     'num_hist_steps_max': 10,  # only used if num_hist_steps: None
+#
+#     'feats_per_node': 50,
+#     'feats_per_node_min': 30,
+#     'feats_per_node_max': 312,
+#     'layer_1_feats': 76,
+#     'layer_1_feats_min': 30,
+#     'layer_1_feats_max': 500,
+#     'layer_2_feats': None,
+#     'layer_2_feats_same_as_l1': True,
+#     'k_top_grcu': 200,
+#     'num_layers': 2,
+#     'lstm_l1_layers': 1,
+#     'lstm_l1_feats': 125,
+#     'lstm_l1_feats_min': 50,
+#     'lstm_l1_feats_max': 500,
+#     'lstm_l2_layers': 1,
+#     'lstm_l2_feats': 400,
+#     'lstm_l2_feats_same_as_l1': True,
+#     'cls_feats': 510,
+#     'cls_feats_min': 100,
+#     'cls_feats_max': 700
+# }
 
