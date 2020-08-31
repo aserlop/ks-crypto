@@ -89,7 +89,7 @@ Currently a report of the project is available
 In order to clarify the whole process a set of diagrams are provided, these correspond with the different bash scripts 
 that execute the project:
 
-* launch_ks_crypto.sh (whole proccess): [download](https://drive.google.com/file/d/1lyp4KZVIgmlUB7ZvpUEMIyCZw3cWSwl_/view?usp=sharing)
+* launch_ks_crypto.sh (whole process): [download](https://drive.google.com/file/d/1lyp4KZVIgmlUB7ZvpUEMIyCZw3cWSwl_/view?usp=sharing)
 * 00_start_dataproc.sh: [download](https://drive.google.com/file/d/19xcYXiZG0-iM2nBDxnfD6Fn5Ky0l1kGZ/view?usp=sharing)
 * 01_extract_data.sh: [download](https://drive.google.com/file/d/1V4t3M0wj9i0q259h5LV0FXxK8TfxrD5S/view?usp=sharing)
 * 02_filter_data.sh: [download](https://drive.google.com/file/d/1cjRBvkpmD9BL2nPZ--fkm5rIvF_CcFMp/view?usp=sharing)
