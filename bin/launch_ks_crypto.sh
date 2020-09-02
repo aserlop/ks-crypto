@@ -22,19 +22,19 @@ PERIOD_UNIT='months'
 # ----------------------------------------------------------------------------------------------------------------------
 
 # Create a dataproc
-./00_start_dataproc.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${ZONE} && \
+./00_start_dataproc.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${ZONE} # && \
 
-# Extract data
-./01_extract_data.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT} && \
-
-# Filter data
-./02_filter_data.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT} && \
-
-# Feature engineering
-./03_feature_engineering.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT} && \
-
-./04_modeling_sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT} && \
-
-# Close dataproc
-./05_close_dataproc.sh ${CLUSTER_NAME} ${REGION}
+## Extract data
+#./01_extract_data.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT} && \
+#
+## Filter data
+#./02_filter_data.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT} && \
+#
+## Feature engineering
+#./03_feature_engineering.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT} && \
+#
+#./04_modeling_sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT} && \
+#
+## Close dataproc
+#./05_close_dataproc.sh ${CLUSTER_NAME} ${REGION}
 

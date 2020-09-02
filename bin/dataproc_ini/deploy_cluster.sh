@@ -9,7 +9,7 @@ BUCKET_NAME=$4
 INI_BASE_GS_PATH=gs://${BUCKET_NAME}/ks-crypto/dataproc_ini
 
 # cluster params
-MASTER_MACHINE_TYPE=n1-standard-4
+MASTER_MACHINE_TYPE=n1-highmem-32
 NUM_MASTERS=1
 MASTER_DISK_SIZE=100GB
 WORKER_MACHINE_TYPE=n1-standard-4
