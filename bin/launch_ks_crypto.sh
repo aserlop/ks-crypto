@@ -33,7 +33,7 @@ PERIOD_UNIT='months'
 ## Feature engineering
 #./03_feature_engineering.sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT} && \
 #
-#./04_modeling_sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT} && \
+#./04_modeling_tgcn_sh ${CLUSTER_NAME} ${REGION} ${BUCKET_NAME} ${DATE_END} ${NUM_PERIODS} ${PERIOD_UNIT} && \
 #
 ## Close dataproc
 #./05_close_dataproc.sh ${CLUSTER_NAME} ${REGION}

@@ -25,7 +25,7 @@ GF_PACKAGE='gs://ks-crypto/graphframes-0.8.0-spark3.0-s_2.12.jar'
 # GF_PACKAGE='graphframes:graphframes:0.8.0-spark3.0-s_2.12'
 
 # Task config
-TASK_MODULE_REL_PATH="../ks_crypto/modeling/task.py"
+TASK_MODULE_REL_PATH="../ks_crypto/modeling/tgcn/task.py" # fill with your model task path
 DROP_OUTPUT_TABLE=1
 BQ_T_INPUT_FULL_TABLENAME="kschool-crypto:ks_crypto_dataset.transactions_ft"
 BQ_N_INPUT_FULL_TABLENAME="kschool-crypto:ks_crypto_dataset.nodes_ft"
